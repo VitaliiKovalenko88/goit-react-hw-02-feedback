@@ -7,35 +7,27 @@ export default class App extends Component {
     bad: 0,
   };
 
-  countFeedback = e => {
-    const { textContent } = e.target;
+  countFeedback = ({ target: { textContent } }) => {
     this.setState(prevState => {
+      console.log(prevState[textContent]);
       return { [textContent]: prevState[textContent] + 1 };
     });
   };
 
   render() {
+    const options = Object.keys(this.state);
+
     return (
       <section>
         <div>
           <h2>Please leave feedback</h2>
-          <ul>
-            <li>
-              <button type="button" onClick={this.countFeedback}>
-                Good
+          <div>
+            {options.map(option => (
+              <button key={option} onClick={this.countFeedback}>
+                {option}
               </button>
-            </li>
-            <li>
-              <button type="button" onClick={this.countFeedback}>
-                Neutral
-              </button>
-            </li>
-            <li>
-              <button type="button" onClick={this.countFeedback}>
-                Bad
-              </button>
-            </li>
-          </ul>
+            ))}
+          </div>
         </div>
         <div>
           <h2>Statistics</h2>
