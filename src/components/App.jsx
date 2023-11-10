@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Statistics from './Statistics/Statistics.jsx';
 
 export default class App extends Component {
   state = {
@@ -40,18 +41,13 @@ export default class App extends Component {
             ))}
           </div>
         </div>
-        <div>
-          <h2>Statistics</h2>
-          <ul>
-            <li>Good: {this.state.good}</li>
-            <li>Neutral: {this.state.neutral}</li>
-            <li>Bad: {this.state.bad}</li>
-            <li>Total: {this.countTotalFeedback()}</li>
-            <li>
-              Positive feedback: {this.countPositiveFeedbackPercentage()}%
-            </li>
-          </ul>
-        </div>
+        <Statistics
+          good={this.state.good}
+          neutral={this.state.neutral}
+          bad={this.state.bad}
+          total={this.countTotalFeedback()}
+          positivePersentage={this.countPositiveFeedbackPercentage()}
+        />
       </section>
     );
   }
