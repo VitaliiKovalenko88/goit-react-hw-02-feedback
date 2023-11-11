@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Statistics from './Statistics/Statistics.jsx';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions.jsx';
+import Section from './Section/Section.jsx';
 
 export default class App extends Component {
   state = {
@@ -27,28 +29,24 @@ export default class App extends Component {
   };
 
   render() {
-    const options = Object.keys(this.state);
-
     return (
-      <section>
-        <div>
-          <h2>Please leave feedback</h2>
-          <div>
-            {options.map(option => (
-              <button key={option} onClick={this.countFeedback}>
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-        <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          positivePersentage={this.countPositiveFeedbackPercentage()}
-        />
-      </section>
+      <>
+        <Section title={'Please leave feedback'}>
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.countFeedback}
+          />
+        </Section>
+        <Section title={'Statistics'}>
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback()}
+            positivePersentage={this.countPositiveFeedbackPercentage()}
+          />
+        </Section>
+      </>
     );
   }
 }
